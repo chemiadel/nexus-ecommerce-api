@@ -14,6 +14,12 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  storeInputType: { // input type
+    email: string; // String!
+    name: string; // String!
+    password: string; // String!
+    phone: string; // String!
+  }
 }
 
 export interface NexusGenEnums {
@@ -28,7 +34,12 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Mutation: {};
   Query: {};
+  Store: { // root type
+    id?: string | null; // ID
+    name?: string | null; // String
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -42,18 +53,37 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Mutation: { // field return type
+    createStore: NexusGenRootTypes['Store'] | null; // Store
+  }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    queryStore: Array<NexusGenRootTypes['Store'] | null> | null; // [Store]
+  }
+  Store: { // field return type
+    id: string | null; // ID
+    name: string | null; // String
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  Mutation: { // field return type name
+    createStore: 'Store'
+  }
   Query: { // field return type name
-    ok: 'Boolean'
+    queryStore: 'Store'
+  }
+  Store: { // field return type name
+    id: 'ID'
+    name: 'String'
   }
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    createStore: { // args
+      data: NexusGenInputs['storeInputType']; // storeInputType!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -64,7 +94,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = never;
 

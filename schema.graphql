@@ -2,6 +2,22 @@
 ### Do not make changes to this file directly
 
 
+type Mutation {
+  createStore(data: storeInputType!): Store
+}
+
 type Query {
-  ok: Boolean!
+  queryStore: [Store]
+}
+
+type Store {
+  id: ID
+  name: String
+}
+
+input storeInputType {
+  email: String!
+  name: String!
+  password: String!
+  phone: String!
 }
